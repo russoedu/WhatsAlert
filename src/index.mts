@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { message } from '@C/message.js'
+import { _wait } from '@H/_wait.js'
 import { Boom } from '@hapi/boom'
 import makeWASocket, { DisconnectReason, useMultiFileAuthState } from 'baileys'
 import P from 'pino'
@@ -16,6 +17,7 @@ sock.ev.on('creds.update', () => {
   return saveCreds()
 })
 
+sock.ev.on('creds.update', (v) => console.log(v))
 sock.ev.on('connection.update', async (update) => {
   const { connection, lastDisconnect, qr } = update
 
@@ -35,3 +37,8 @@ sock.ev.on('connection.update', async (update) => {
 })
 
 sock.ev?.on('messages.upsert', message.upsertHandler)
+
+while (1) {
+  await _wait(2)
+  console.log('.')
+}
