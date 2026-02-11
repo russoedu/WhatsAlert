@@ -1,0 +1,28 @@
+{
+	"settings": {
+		"files.exclude": {
+      "typedoc.json": true,
+      "package-lock.json": true,
+      ".editorconfig": true,
+      "jest.config.js": true,
+      ".gitignore": true,
+      // "dist": true,
+      
+      "doc": true,
+      "node_modules": true,
+      "coverage": true,
+			"eslint.config.mjs": true
+
+    },
+		"cSpell.words": [
+			"creds",
+			"qrcode",
+			"Whats"
+		]
+	},
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+}

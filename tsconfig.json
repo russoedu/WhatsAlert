@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist",
+
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+
+    "target": "esnext",
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+      "Decorators"
+    ],
+    "types": ["jest", "node"],
+    "jsx": "react-jsx",
+
+    "noEmit": true,
+
+    "emitDeclarationOnly": true,
+
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "removeComments": false,
+
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "isolatedModules": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false,
+
+    "paths": {
+      "@T": ["./src/_types"],
+      "@C/*": ["./src/_controllers/*"],
+      "@M/*": ["./src/_models/*"],
+      "@H/*": ["./src/_helpers/*"],
+      "@J/*": ["./src/_jest/*"]
+    }
+  },
+  "exclude": [
+    "./baileys_auth/**",
+    "./dist/**",
+    "./lib/**",
+    "./coverage/**",
+    "./doc/**",
+    "./node_modules/**"
+  ]
+}

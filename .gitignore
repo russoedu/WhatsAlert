@@ -1,0 +1,8 @@
+# Modules
+node_modules
+
+# Auth data
+baileys_auth
+
+# Build folders
+dist
