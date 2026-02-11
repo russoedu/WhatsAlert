@@ -3,6 +3,7 @@ import { Boom } from '@hapi/boom'
 import makeWASocket, { DisconnectReason, useMultiFileAuthState } from 'baileys'
 import P from 'pino'
 import qrCode from 'qrcode'
+import { message } from './message'
 
 class Sock {
   #initialised: boolean
@@ -22,33 +23,30 @@ class Sock {
       logger: P(), // you can configure this as much as you want, even including streaming the logs to a ReadableStream for upload or saving to a file
     })
 
-    this.#waSock.ev.on('creds.update', () => this.#saveCreds(saveCreds))
+    this.#waSock.ev.on('creds.update', () => {
+      this.#initialised = true
+
+      return saveCreds()
+    })
+
     this.#waSock.ev.on('connection.update', async (update) => {
       const { connection, lastDisconnect, qr } = update
+
+      console.log(connection)
+      console.log(lastDisconnect)
 
       if (
         connection === 'close' &&
           (lastDisconnect?.error as Boom)?.output?.statusCode === DisconnectReason.restartRequired
       ) {
         this.#initialised = false
-        await this.connect()
       }
       if (qr) {
         await qrCode.toString(qr, { type: 'terminal' })
       }
     })
 
-    return this.ev
-  }
-
-  #saveCreds (saveCreds: () => Promise<void>) {
-    this.#initialised = true
-
-    return saveCreds()
-  }
-
-  get ev () {
-    return this.#waSock.ev
+    this.#waSock.ev?.on('messages.upsert', message.upsertHandler)
   }
 
   get waSock () {

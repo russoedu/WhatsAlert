@@ -16,9 +16,9 @@
   },
   "license": "MIT",
   "author": "Ed Russo",
-  "main": "dist/index.js",
+  "main": "dist/index.mjs",
   "scripts": {
-    "start": "tsc -p tsconfig.dev.json && tsc-alias -p tsconfig.dev.json &&node dist/index.js",
+    "start": "rimraf dist && tsc -p tsconfig.dev.json && tsc-alias -p tsconfig.dev.json && node dist/index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
@@ -54,7 +54,8 @@
   },
   "overrides": {
     "eslint": "$eslint",
-    "globals": "$globals"
+    "globals": "$globals",
+    "glob": "13.0.2"
   },
   "dependencies": {
     "baileys": "^7.0.0-rc.9",
